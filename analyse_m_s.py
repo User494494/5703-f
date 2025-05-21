@@ -590,99 +590,6 @@ def save_scene_heatmap(heatmap_data, background_frame, output_dir, scene_name, f
 
 # In[ ]:
 
-
-def main():
-    """Process all videos in a directory without conversion."""
-    # Set your paths
-    input_dir = "/Users/jiajunqi/Downloads/5703videos"
-    output_dir = "/Users/jiajunqi/Downloads/5703result"
-    
-    # Ensure output directory exists
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Set timestamp and user using the correct format
-    timestamp = "2025-05-14 12:37:36"
-    user = "tmpop21"
-    
-    print(f"Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): {timestamp}")
-    print(f"Current User's Login: {user}")
-    
-    # Process all videos in the input directory
-    process_all_videos_direct(input_dir, output_dir, timestamp, user)
-
-def process_all_videos_direct(input_dir, output_dir, timestamp, user):
-    """
-    Process all videos in a directory directly (no conversion)
-    
-    Args:
-        input_dir: Directory containing video files
-        output_dir: Base directory for outputs
-        timestamp: Current timestamp string
-        user: Current username
-    """
-    # Get all video files in the directory
-    video_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.m4v']
-    video_files = []
-    
-    for file in os.listdir(input_dir):
-        if any(file.lower().endswith(ext) for ext in video_extensions):
-            video_files.append(os.path.join(input_dir, file))
-    
-    if not video_files:
-        print(f"No video files found in directory: {input_dir}")
-        return
-    
-    print(f"Found {len(video_files)} video files to process.")
-    
-    # Process each video
-    successful_videos = 0
-    for i, video_path in enumerate(video_files):
-        print(f"\n[{i+1}/{len(video_files)}] Processing video: {os.path.basename(video_path)}")
-        
-        try:
-            # Check if the video can be opened
-            cap = cv2.VideoCapture(video_path)
-            if not cap.isOpened():
-                print(f"Error: Could not open video file {video_path}")
-                cap.release()
-                continue
-                
-            # Get video properties
-            frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-            frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            fps = cap.get(cv2.CAP_PROP_FPS)
-            total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-            
-            print(f"Video info: {frame_width}x{frame_height}, {fps} fps, {total_frames} frames")
-            cap.release()
-            
-            # Extract video name for output folder
-            video_name = os.path.splitext(os.path.basename(video_path))[0]
-            
-            # Create video-specific directory
-            video_dir = os.path.join(output_dir, video_name)
-            os.makedirs(video_dir, exist_ok=True)
-            
-            # Process with scene detection (or as a single scene)
-            success = process_video_with_scenes(
-                video_path, 
-                video_dir,
-                timestamp=timestamp,
-                user=user
-            )
-            
-            if success:
-                successful_videos += 1
-                print(f"Successfully processed: {video_name}")
-            
-        except Exception as e:
-            print(f"Error processing video {video_path}: {str(e)}")
-            import traceback
-            traceback.print_exc()
-    
-    print(f"\nProcessing complete! Successfully processed {successful_videos}/{len(video_files)} videos.")
-    print(f"Results saved to: {output_dir}")
-
 def process_video_with_scenes(video_path, output_dir, timestamp, user, 
                             scene_threshold=22.0, min_scene_duration=10):
     """
@@ -1132,8 +1039,6 @@ def generate_keyboard_focus_heatmap(video_path, scene_folder, start_frame, end_f
     
     return keyboard_path
 
-if __name__ == "__main__":
-    main()
 
 
 # In[ ]:
