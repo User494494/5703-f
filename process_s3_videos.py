@@ -1,7 +1,7 @@
 import boto3
 import os
 import tempfile
-from analyze_m_s import analyze_screen
+from analyse_m_s import analyze_screen
 
 BUCKET = 'cs14-2-recordingtool'
 s3 = boto3.client('s3')
