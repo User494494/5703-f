@@ -6,7 +6,7 @@ from analyse_m_s import analyze_screen
 BUCKET = 'cs14-2-recordingtool'
 s3 = boto3.client('s3')
 
-def list_screen_files(prefix='recording__results/'):
+def list_screen_files(prefix='recording_results/'):
     paginator = s3.get_paginator('list_objects_v2')
     for page in paginator.paginate(Bucket=BUCKET, Prefix=prefix):
         for obj in page.get('Contents', []):
