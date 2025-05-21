@@ -27,7 +27,7 @@ def process_and_upload(key):
                 abs_path = os.path.join(root, file)
                 rel_path = os.path.relpath(abs_path, output_dir)
                 rel_parent = os.path.dirname(key).replace('recording_results/', '', 1)
-                output_key = 'output/' + rel_parent + '/' + rel_path
+                output_key = 'Output/' + rel_parent + '/' + rel_path
                 s3.upload_file(abs_path, BUCKET, output_key)
                 print(f"Uploaded {output_key}")
 
