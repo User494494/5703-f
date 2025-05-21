@@ -1039,6 +1039,13 @@ def generate_keyboard_focus_heatmap(video_path, scene_folder, start_frame, end_f
     
     return keyboard_path
 
+def analyze_screen(video_path, output_dir, timestamp, user):
+    process_video_with_scenes(
+        video_path, output_dir, timestamp, user,
+        scene_threshold=22.0, min_scene_duration=10
+    )
+    return output_dir
+
 
 
 # In[ ]:
