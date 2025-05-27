@@ -20,7 +20,7 @@ import shutil
 # In[ ]:
 
 
-def detect_scene_changes(video_path, threshold=30.0, min_scene_duration=10):
+def detect_scene_changes(video_path, threshold=22.0, min_scene_duration=100):
     """
     Detect scene changes in a video using frame differencing.
     
