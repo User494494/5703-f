@@ -185,8 +185,3 @@ if __name__ == "__main__":
     main()
 
 
-# In[2]:
-
-
-get_ipython().system('jupyter nbconvert --to script process_s3_videos_new.ipynb')
-
