@@ -9,6 +9,9 @@ import os
 import tempfile
 import subprocess
 from analyse_m_s import analyze_screen
+from datetime import datetime
+import getpass
+
 
 BUCKET = 'cs14-2-recordingtool'
 s3 = boto3.client('s3')
@@ -99,7 +102,9 @@ def process_and_upload(key):
             os.makedirs(output_dir, exist_ok=True)
             
             print(f"Analyzing video {os.path.basename(key)}...")
-            analyze_screen(mp4_path, output_dir, "2025-05-27", "tmpop21")
+            current_date = datetime.utcnow().strftime("%Y-%m-%d")
+            current_user = getpass.getuser()
+            analyze_screen(mp4_path, output_dir, current_date, current_user)
             
             # Step 4: Upload all analysis results to S3
             print(f"Uploading results for {os.path.basename(key)}...")
