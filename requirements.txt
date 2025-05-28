@@ -4,3 +4,9 @@ numpy
 matplotlib
 Pillow
 scipy
+
+This project requires the FFmpeg tool for video processing. Please make sure FFmpeg is installed on your system.
+On Ubuntu/Debian systems, you can install it with:
+
+sudo apt update
+sudo apt install ffmpeg
