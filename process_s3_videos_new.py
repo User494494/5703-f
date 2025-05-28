@@ -156,8 +156,8 @@ def main():
     """
     print("Starting video processing pipeline...")
     print(f"S3 Bucket: {BUCKET}")
-    print(f"Current time: 2025-05-27 10:25:27 UTC")
-    print(f"User: tmpop21")
+    print(f"Current time: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC")
+    print(f"User: {getpass.getuser()}")
     print("-" * 50)
     
     processed_count = 0
