@@ -5,5 +5,10 @@ analyse_m_s.py contains the generation of heat maps for the mouse and screen rea
 ## process_s3_videos.py
 process_s3_videos.py connects the resources in AWS and determines how to run the analyse_m_s.
 
+## process_s3_videos_.py
+new version of process_s3_videos
+
 ## requirement.txt
 requirement.txt is the required external libraries
+
+
